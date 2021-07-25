@@ -1,0 +1,42 @@
+<aura:component controller="StrategicFSApex">
+      
+  
+    
+    <aura:attribute type="List" name="Debts"/>
+    <aura:attribute type="Integer" name="totalRowCount"/>
+    <aura:attribute type="Integer" name="chekedRowCount" default="0"/>
+    <aura:attribute type="Integer" name="totalBalance" default="0"/>
+    <aura:attribute name="mycolumns" type="List"/>
+      
+    <aura:handler name="init" value="{!this}" action="{!c.fetchDebts}"/>
+    
+      
+    <lightning:datatable data="{! v.Debts }"
+                         columns="{! v.mycolumns }"
+                         keyField="id"
+                         hideCheckboxColumn="false"
+                         onrowselection="{! c.getSelectedName }" />
+     
+    <div>
+        <lightning:button variant="brand" label="Add Debt" title="Add Row" onclick="{! c.addRow }" /> 
+        <lightning:button variant="brand" label="Remove Debt" title="Add Row" onclick="{! c.removeRow }" /> 
+    </div>
+    
+    
+    <div>
+    	<div class="totalDisplay">
+            Total:<span>${!v.totalBalance}</span> 
+    	</div>
+    </div>
+    
+    <div>
+    	<table class="displayRows">
+     	 	<th>Total Row Count: {!v.Debts.length}</th>
+        
+      		<th>Checked Row Count: {!v.chekedRowCount}</th>
+
+    	</table>
+    </div>
+        
+	  
+</aura:component>
